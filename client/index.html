@@ -1,16 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<meta charset="UTF-8" />
 	<title>TPE Info</title>
 	<style type="text/css">
 	body {
 		text-align: center;
+		background-color: black;
 	} 
+	p, h1, h2 {
+		color: white;
+	}
 	</style>
 </head>
 <body>
-	<h1>Bonjour</h1>
+	<h1>Chat du TPE (miaou) !</h1>
+	<div id="divPseudo" ></div>
+	<div id="isTyping" ></div>
+	<form action="/"  method="POST" id="formMessage" >
+	   	<input type = "text" id = "message" name = "message" placeholder = "Entrez votre message..." size = "50" autofocus />
+	    <input type = "submit" id = "envoiMessage" value = "Envoyer">
+	</form>
 	<div id="divMessage" ></div>
+
+	<script type="text/javascript">
+	var user = {};
+
+	var socket = io.connect('localhost:8080', { 'sync disconnect on unload': true });
+
+	var pseudo = prompt('Quel est votre pseudo ?');
+	socket.emit('pseudo', pseudo);
+
+	$('#divPseudo').prepend('<h2>Vous êtes connecté sous le nom de ' + pseudo + '</h2>');
+
+	$('#formMessage').submit(function () {
+		var message = $('#message').val();
+		sendMessage(message);
+		$('#message').val('').focus();
+		return false;
+	});
+
+	function sendMessage (message) 
+	{
+		var codedMessage = encodeStr(message);
+		socket.emit('message', {pseudo: pseudo, message: codedMessage});
+		printMessage(pseudo, message); // Won't be definitive. To give priority to the server { Client Non Connected->No Messages Displayed }
+	}
+
+	function decodeChar (inputChar) 
+	{
+		var codeChar = false ;
+		var codeAlpha = ['/-\\', '8', '<', '|)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
+		var realAlpha = ['a'   , 'b', 'c', 'd',   'e',  'f', 'g',  'h',  'i',  'j', 'k',  'l',   'm',    'n',  'o', 'p',  'q',   'r',  's', 't',  'u',   'v',    'w', 'x',   'y', 'z'  ];
+		var outputChar = '';
+		for (var i = 0; i < codeAlpha.length; i++) {
+			if (inputChar == codeAlpha[i]) {
+				outputChar = realAlpha[i];
+				break ;
+			}
+			else {
+				outputChar = inputChar ;
+				continue ;
+			}
+		};
+		return outputChar ;
+	}
+
+	function decodeStr (inputStr) // Receive leet data->(1337) into an array ; Return normal text->(leet)
+	{
+		var outputStr = '' ;
+		var addChar = '';
+		for (var i = 0; i < inputStr.length; i++) {
+			addChar = inputStr[i];
+			outputStr = outputStr + decodeChar(addChar);
+		}
+		return outputStr;
+	}
+
+	function encodeChar (inputChar)
+	{	
+		var codeChar = false ;
+		var codeAlpha = ['/-\\', '8', '<', '|)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
+		var realAlpha = [ 'a'  , 'b', 'c', 'd',   'e',  'f', 'g',  'h',  'i',  'j', 'k',  'l',   'm',    'n',  'o', 'p',  'q',   'r',  's', 't',  'u',   'v',    'w', 'x',   'y', 'z'  ];
+		var outputChar = '';
+		for (var i = 0; i < codeAlpha.length; i++) {
+			if (inputChar == realAlpha[i]) {
+				outputChar = codeAlpha[i];
+				codeChar = true ;
+				break ;
+			}
+			else {
+				outputChar = inputChar;
+				codeChar = false ;
+				continue ;
+			}
+		}
+		return outputChar;
+	}
+
+	function encodeStr (inputStr) 
+	{
+		var treat = inputStr.split('');
+		var outputStr = [] ;
+		var addChar = '';
+		for (var i = 0; i < treat.length; i++) {
+			addChar = treat[i];
+			outputStr[i] = encodeChar(addChar);
+		}
+		return outputStr;
+	}
+
+	function returnStr (inputStr) {
+			var array = encodeStr(inputStr);
+			var outputStr = '';
+			for (var i = 0; i < array.length; i++) {
+				outputStr = outputStr + array[i] ;
+			};
+			return outputStr; 
+	}
+
+	function printMessage (data, type) 
+	{
+		if (type == 'message') {
+			$('#divMessage').prepend('<p>' + data.pseudo + ' : ' + data.message);
+		}
+		else if (type == 'newConnection') {
+			$('#divMessage').prepend('<p><strong>' + data.pseudo + '</strong> vient de se connecter !</p>');
+		}
+	}
+
+	socket.on('newConnection', function (pseudo) {
+		printMessage({pseudo: pseudo}, 'newConnection');
+	});
+
+	socket.on('message', function (data) {
+		printMessage({pseudo: data.pseudo, message: decodeStr(data.message)}, 'message');
+	});
+
+	</script>
 </body>
 </html>

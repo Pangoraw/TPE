@@ -1,12 +1,10 @@
 {
-    "name": "TPE Info",
+    "name": "TPE",
     "version": "0.0.1",
     "author": "Paul",
-    "description": "A server that just broadcast received message."
+    "description": "A server that just broadcast received message.",
     "dependencies": {
-        "markdown": "~0.4"
-        "ent": "No idea"
-        "socket.io": "no idea"
-        "express" : "still no idea"
+        "socket.io": "latest",
+        "express" : "latest"
     }
 }
