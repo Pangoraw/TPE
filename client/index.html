@@ -50,7 +50,7 @@
 
 	function decodeChar (inputChar) // Décode un seul caractère, appelé par decodeStr  
 	{
-		var codeAlpha = ['/-\\', '8', '<', '[)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
+		var codeAlpha = ['/-\\', '8', '₡', '[)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
 		var realAlpha = ['a'   , 'b', 'c', 'd',   'e',  'f', 'g',  'h',  'i',  'j', 'k',  'l',   'm',    'n',  'o', 'p',  'q',   'r',  's', 't',  'u',   'v',    'w', 'x',   'y', 'z'  ];
 		var outputChar = '';
 		for (var i = 0; i < codeAlpha.length; i++) {
@@ -79,7 +79,7 @@
 
 	function encodeChar (inputChar) // Même que decodeChar mais encodeChar 
 	{	
-		var codeAlpha = ['/-\\', '8', '<', '[)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
+		var codeAlpha = ['/-\\', '8', '₡', '[)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
 		var realAlpha = [ 'a'  , 'b', 'c', 'd',   'e',  'f', 'g',  'h',  'i',  'j', 'k',  'l',   'm',    'n',  'o', 'p',  'q',   'r',  's', 't',  'u',   'v',    'w', 'x',   'y', 'z'  ];
 		var outputChar = '';
 		for (var i = 0; i < codeAlpha.length; i++) {
