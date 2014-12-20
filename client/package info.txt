@@ -1,0 +1,13 @@
+	Time		 Server IP		 Client IP		Protocol	Length						Info
+49.775054000	192.168.0.26	192.168.0.21	  TCP	     125 	8080→49473 [PSH, ACK] Seq=149 Ack=15 Win=274 Len=71
+
+
+					Packet's Content					 Interpretation
+0000   bc 5f f4 e6 41 ab b8 27 eb d6 61 5f 08 00 45 00  ._..A..'..a_..E.
+0010   00 6f 45 9d 40 00 40 06 73 6c c0 a8 00 1a c0 a8  .oE.@.@.sl......
+0020   00 15 1f 90 c1 41 0d fb 85 ea 42 72 7d e3 50 18  .....A....Br}.P.
+0030   01 12 90 ad 00 00 81 45 34 32 5b 22 6d 65 73 73  .......E42["mess
+0040   61 67 65 22 2c 7b 22 70 73 65 75 64 6f 22 3a 22  age",{"pseudo":"
+0050   50 61 75 6c 22 2c 22 6d 65 73 73 61 67 65 22 3a  Paul","message":
+0060   5b 22 24 22 2c 22 2f 2d 5c 5c 22 2c 22 c2 a3 22  ["$","/-\\",".."
+0070   2c 22 7c 5f 7c 22 2c 22 37 22 5d 7d 5d           ,"|_|","7"]}]

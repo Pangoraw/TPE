@@ -27,7 +27,7 @@
 
 	<script type="text/javascript">
 
-	var socket = io.connect('localhost:8080', { 'sync disconnect on unload': true }); /*On se co à socket io (le serveur)*/
+	var socket = io.connect('192.168.0.26:8080', { 'sync disconnect on unload': true }); /*On se co à socket io (le serveur)*/
 
 	var pseudo = prompt('Quel est votre pseudo ?'); /*On récupère le pseudo et on l'envoie au serveur*/
  	socket.emit('pseudo', pseudo);
