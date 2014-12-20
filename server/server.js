@@ -24,7 +24,7 @@ socket.on('connection', function (client)
 	client.on('message', function (data) 
 	{ // idem
 		client.broadcast.emit('message', {"pseudo": data.pseudo, "message": data.message});
-		socket.emit('message', {"pseudo": data.pseudo, "message": data.message});
+		client.emit('message', {"pseudo": data.pseudo, "message": data.message});
 		console.log(data.pseudo + ' : ' + returnStr(data.message));
 	});
 });
