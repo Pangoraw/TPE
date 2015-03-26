@@ -1,0 +1,143 @@
+@import './fonts.styl'
+@import 'nib'
+
+global-reset()
+
+div#content
+	height 100%
+	width 100%
+	position fixed
+	top 0
+	left 0
+
+div#view
+	height 100%
+	width 100%
+
+div#chat
+	overflow-y auto	
+	height 100%
+	width 100%
+	background-color #00aad4ff
+	div#info
+		h1 
+			font-family Tesla
+			color #00aad4ff
+			text-transform uppercase
+			text-align center
+			font-size 50px
+		a
+			width 30px
+			height 30px
+			background-color #f6cd77ff
+			border-radius 50%
+			display block
+			margin 0 auto
+			text-align center	
+		height 10%
+		background #d3d5d6ff
+		border-bottom 15px solid white
+		
+	form
+		width 100%
+		position fixed
+		bottom 0
+		left 0
+		div
+			overflow hidden
+			padding-right .5em
+			input[type="text"]
+				height 40px
+				font-family OpenSansLight
+				font-weight lighter
+				font-size 30px
+				width 100%
+		input[type="submit"]
+			margin-right 3px
+			margin-left 0
+			height 43px
+			float right
+			cursor pointer /*forces the cursor to change to a hand when the button is hovered*/
+			padding 5px 25px /*add some padding to the inside of the button*/
+			background #d3d5d6ff /*the colour of the button*/
+			border 1px solid #b7babcff /*required or the default border for the browser will appear*/
+			/*give the button a drop shadow*/
+			-webkit-box-shadow  0 0 4px rgba(0,0,0, .75)
+			-moz-box-shadow  0 0 4px rgba(0,0,0, .75)
+			box-shadow  0 0 4px rgba(0,0,0, .75)
+			/*style the text*/
+			color #00aad4ff
+			font-size 1.1em
+			&:hover
+				background-color #8b9093ff /*make the background a little darker*/
+	ul
+		position relative
+		width 40%
+		margin-left auto
+		margin-right auto	
+		li 
+			font-family OpenSansLight
+			font-weight lighter
+			color #fff
+			line-height 2em
+			font-size 1.5em
+
+div#enigma
+	height 100%
+	width 100%
+	background-color #ff8080ff
+	p.message
+		font-family OpenSans
+		color white
+		font-size 50px
+		text-align center
+	button
+		height 50px
+		width 50px
+		float left
+		border-radius 50%
+		border none
+		margin 10px
+		text-transform uppercase
+		font-family OpenSans
+		font-weight lighter
+		color white
+		font-size 100%
+		&:focus
+			outline none
+		&.out
+			&.on
+				background-color #f5da63ff
+			&.off
+				background-color #f59a63ff
+		&.in
+			background-color #f6cd77ff
+			&:hover
+				background-color #d7960eff			
+		&#reset
+			&:hover
+				background-color #d7960eff			
+			background-color #f6cd77ff
+			float none
+			display block
+			margin-left auto
+			margin-right auto
+			margin-top 50px
+			text-align center
+	div.clear
+		clear both
+	ul
+		display block
+		margin 0 auto
+		text-align center
+		width 910px
+	div#info
+		height 5%
+		background #d3d5d6ff
+		border-bottom 10px solid white
+		h1 
+			font-family Tesla
+			color #00aad4ff
+			text-transform uppercase
+			text-align center
+			font-size 50px

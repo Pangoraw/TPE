@@ -1,0 +1,15 @@
+#enigma
+	div#info
+		h1 machine enigma
+	p.message {{message}} <> {{codedMessage}}
+	ul
+		li(ng-repeat="char in alphabet")
+			button.out.off(id="{{char}}") {{char}}
+		.clear
+	br
+
+	ul
+		li(ng-repeat="char in alphabet")
+			button.in(ng-click="click(char)") {{char}}
+		.clear
+	button#reset(ng-click="reset()") R

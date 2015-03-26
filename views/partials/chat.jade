@@ -1,0 +1,11 @@
+div#chat
+	div#info
+		h1 {{pseudo}}
+		a(href="#/enigma", target="_blank")
+	ul
+		li(ng-repeat="message in messages")
+			p.message {{message.author}} : {{message.message}}
+	form(ng-submit="send()")
+		input(type="submit", value="Envoyer")
+		div
+			input(type="text", ng-model="content", autofocus)

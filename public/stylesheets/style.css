@@ -1,0 +1,267 @@
+@font-face {
+  font-weight: lighter;
+  font-family: OpenSansLight;
+  src: url("fonts/OpenSans-Light.ttf");
+}
+@font-face {
+  font-family: OpenSans;
+  src: url("fonts/OpenSans-Regular.ttf");
+}
+@font-face {
+  font-family: Tesla;
+  src: url("fonts/TESLA.ttf");
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+div#content {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+div#view {
+  height: 100%;
+  width: 100%;
+}
+div#chat {
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  background-color: #00aad4;
+}
+div#chat div#info {
+  height: 10%;
+  background: #d3d5d6;
+  border-bottom: 15px solid #fff;
+}
+div#chat div#info h1 {
+  font-family: Tesla;
+  color: #00aad4;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 50px;
+}
+div#chat div#info a {
+  width: 30px;
+  height: 30px;
+  background-color: #f6cd77;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+div#chat form {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+div#chat form div {
+  overflow: hidden;
+  padding-right: 0.5em;
+}
+div#chat form div input[type="text"] {
+  height: 40px;
+  font-family: OpenSansLight;
+  font-weight: lighter;
+  font-size: 30px;
+  width: 100%;
+}
+div#chat form input[type="submit"] {
+  margin-right: 3px;
+  margin-left: 0;
+  height: 43px;
+  float: right;
+  cursor: pointer;
+  padding: 5px 25px;
+  background: #d3d5d6;
+  border: 1px solid #b7babc;
+/*give the button a drop shadow*/
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0 0 4px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.75);
+  box-shadow: 0 0 4px rgba(0,0,0,0.75);
+/*style the text*/
+  color: #00aad4;
+  font-size: 1.1em;
+}
+div#chat form input[type="submit"]:hover {
+  background-color: #8b9093;
+}
+div#chat ul {
+  position: relative;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+div#chat ul li {
+  font-family: OpenSansLight;
+  font-weight: lighter;
+  color: #fff;
+  line-height: 2em;
+  font-size: 1.5em;
+}
+div#enigma {
+  height: 100%;
+  width: 100%;
+  background-color: #ff8080;
+}
+div#enigma p.message {
+  font-family: OpenSans;
+  color: #fff;
+  font-size: 50px;
+  text-align: center;
+}
+div#enigma button {
+  height: 50px;
+  width: 50px;
+  float: left;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: none;
+  margin: 10px;
+  text-transform: uppercase;
+  font-family: OpenSans;
+  font-weight: lighter;
+  color: #fff;
+  font-size: 100%;
+}
+div#enigma button:focus {
+  outline: none;
+}
+div#enigma button.out.on {
+  background-color: #f5da63;
+}
+div#enigma button.out.off {
+  background-color: #f59a63;
+}
+div#enigma button.in {
+  background-color: #f6cd77;
+}
+div#enigma button.in:hover {
+  background-color: #d7960e;
+}
+div#enigma button#reset {
+  background-color: #f6cd77;
+  float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+div#enigma button#reset:hover {
+  background-color: #d7960e;
+}
+div#enigma div.clear {
+  clear: both;
+}
+div#enigma ul {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 910px;
+}
+div#enigma div#info {
+  height: 5%;
+  background: #d3d5d6;
+  border-bottom: 10px solid #fff;
+}
+div#enigma div#info h1 {
+  font-family: Tesla;
+  color: #00aad4;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 50px;
+}
