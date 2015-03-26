@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> <!-- Salut Théo -->
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> <!-- Alors ces deux lignes servent à appeler des bibilothèques -->
+	<meta charset="UTF-8" /> <!-- ça c'est pour l'écriture quand tu mets des accents et tout -->
+	<title>TPE Info</title> 
+	<style type="text/css">/* Le style man */
+	body {
+		text-align: center;
+		background-color: black;
+	} 
+	p, h1, h2 {
+		color: white;
+	}
+	</style>
+</head>
+<body>
+	<h1>Chat du TPE (miaou) !</h1>
+	<div id="divPseudo" ></div> <!-- Deux div quis servent à mettre ton pseudo/peut etre plus tard mettre qui est en train de taper -->
+	<div id="isTyping" ></div>
+	<form action="/"  method="POST" id="formMessage" > <!-- Le formulaire d'envoi de message -->
+	   	<input type = "text" id = "message" name = "message" placeholder = "Entrez votre message..." size = "50" autofocus />
+	    <input type = "submit" id = "envoiMessage" value = "Envoyer">
+	</form>
+	<div id="divMessage" ></div> <!-- Ici javascript ecrit les messages grace à la fonction printMessage(); --> 
+
+	<script type="text/javascript">
+
+	var socket = io.connect('192.168.0.26:8080', { 'sync disconnect on unload': true }); /*On se co à socket io (le serveur)*/
+
+	var pseudo = prompt('Quel est votre pseudo ?'); /*On récupère le pseudo et on l'envoie au serveur*/
+ 	socket.emit('pseudo', pseudo);
+
+	$('#divPseudo').prepend('<h2>Vous êtes connecté sous le nom de ' + pseudo + '</h2>'); /*On ecrit dans la divPseudo 'blblbllblb ton pseudo'*/
+
+	$('#formMessage').submit(function () { /*Si le formulaire est donné, on utilise le fonction sendMessage pour envoyer le contenu de la zone message*/
+		var message = $('#message').val();
+		sendMessage(message);
+		$('#message').val('').focus(); /*On remet la valeur de message à zero dans le formulaire et on le focus*/
+		return false; /*Je comprends pas moi même (l'enlève pas non plus)*/
+	});
+
+	function sendMessage (message) /*Pour envoyer un message*/ 
+	{
+		var codedMessage = encodeStr(message);
+		socket.emit('message', {pseudo: pseudo, message: codedMessage}); /*Envoie un objet contenant pseudo et message*/
+/*		printMessage(pseudo, message); // Won't be definitive. To give priority to the server { Client Non Connected->No Messages Displayed } */	
+	}
+
+	function decodeChar (inputChar) // Décode un seul caractère, appelé par decodeStr  
+	{
+		var codeAlpha = ['/-\\', '8', '₡', '[)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
+		var realAlpha = ['a'   , 'b', 'c', 'd',   'e',  'f', 'g',  'h',  'i',  'j', 'k',  'l',   'm',    'n',  'o', 'p',  'q',   'r',  's', 't',  'u',   'v',    'w', 'x',   'y', 'z'  ];
+		var outputChar = '';
+		for (var i = 0; i < codeAlpha.length; i++) {
+			if (inputChar == codeAlpha[i]) {
+				outputChar = realAlpha[i];
+				break ;
+			}
+			else {
+				outputChar = inputChar ;
+				continue ;
+			}
+		};
+		return outputChar ; // Tu peux essayer de comprendre (pas sur que tu y arrives)
+	}
+
+	function decodeStr (inputStr) // Receive leet data->(1337) into an array ; Return normal text->(leet) Tout est dit.
+	{
+		var outputStr = '' ;
+		var addChar = '';
+		for (var i = 0; i < inputStr.length; i++) {
+			addChar = inputStr[i];
+			outputStr = outputStr + decodeChar(addChar);
+		}
+		return outputStr;
+	}
+
+	function encodeChar (inputChar) // Même que decodeChar mais encodeChar 
+	{	
+		var codeAlpha = ['/-\\', '8', '₡', '[)', '[-', '|=', '@', '{-}', 'l', ',)', '|<', '£', '|^^|', '|\\|', '0', '|°', 'é', '|°\\', '$', '7', '|_|', '\\/', 'VV', '><', '`/', '7_' ];
+		var realAlpha = [ 'a'  , 'b', 'c', 'd',   'e',  'f', 'g',  'h',  'i',  'j', 'k',  'l',   'm',    'n',  'o', 'p',  'q',   'r',  's', 't',  'u',   'v',    'w', 'x',   'y', 'z'  ];
+		var outputChar = '';
+		for (var i = 0; i < codeAlpha.length; i++) {
+			if (inputChar == realAlpha[i]) {
+				outputChar = codeAlpha[i];
+				break ;
+			}
+			else {
+				outputChar = inputChar;
+				continue ;
+			}
+		}
+		return outputChar;
+	}
+
+	function encodeStr (inputStr) // Même que decodeStr mais encodeStr
+	{
+		var treat = inputStr.split('');
+		var outputStr = [] ;
+		var addChar = '';
+		for (var i = 0; i < treat.length; i++) {
+			addChar = treat[i];
+			outputStr[i] = encodeChar(addChar);
+		}
+		return outputStr;
+	}
+
+	function returnStr (inputStr) { // Fonction inutile dans l'immédiat. Tu rentres une array codé en LEET et elle renvoie une string :) Ne supprime pas.
+			var array = encodeStr(inputStr);
+			var outputStr = '';
+			for (var i = 0; i < array.length; i++) {
+				outputStr = outputStr + array[i] ;
+			};
+			return outputStr; 
+	}
+
+	function printMessage (data, type) // Tout est dit dans le nom. data est un objet. 
+	{
+		if (type == 'message') {
+			$('#divMessage').prepend('<p>' + data.pseudo + ' : ' + data.message);
+		}
+		else if (type == 'newConnection') {
+			$('#divMessage').prepend('<p><strong>' + data.pseudo + '</strong> vient de se connecter !</p>');
+		}
+	}
+
+	socket.on('newConnection', function (pseudo) { // Quand quelqu'un de nouveau se co on l'imprime dans le chat
+		printMessage({pseudo: pseudo}, 'newConnection');
+	});
+
+	socket.on('message', function (data) {
+		printMessage({pseudo: data.pseudo, message: decodeStr(data.message)}, 'message'); // Pareil avec un message
+	});
+
+	</script>
+</body>
+</html>
